@@ -69,48 +69,8 @@
 <div style="text-align:left"><span style="font-size:14px"><span style="color:rgb(51,51,51); font-family:&quot;Microsoft YaHei&quot;,Arial"><strong><span style="color:rgb(51,51,51); font-family:&quot;Microsoft YaHei&quot;,Arial; font-size:14px"><span style="font-family:Arial"><br>
 </span></span></strong></span></span></div>
 <div style="text-align:left"><span style="font-family:&quot;Microsoft YaHei&quot;,Arial"><strong><span style="font-family:&quot;Microsoft YaHei&quot;,Arial"><span style="font-family:Arial"></span></span></strong></span><pre name="code" class="java" style="color: rgb(51, 51, 51); font-size: 14px;">
-  public class MainActivity extends AppCompatActivity {
-
-    @Bind(R.id.iv_appbar)
-    ImageView iv_appbar;
-
-    @Bind(R.id.main_toolbar)
-    Toolbar toolbar;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-        initToolBar();
-    }
-
-
-    private void initToolBar() {
-        this.setSupportActionBar(toolbar);
-        toolbar.setTitle("我的");
-    }
-
-    @OnClick({R.id.main_toolbar, R.id.btn_float})
-    public void onClick(View view) {
-        final UCrop.Options options = new UCrop.Options();
-        int color = ContextCompat.getColor(view.getContext(), R.color.colorPrimary);
-        options.setToolbarColor(color);
-        options.setStatusBarColor(ContextCompat.getColor(view.getContext(), R.color.colorPrimaryDark));
-        options.setActiveWidgetColor(color);
-        switch (view.getId()) {
-            case R.id.main_toolbar:
-                Toast.makeText(MainActivity.this, "Toolbar点击", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.btn_float: {
-                showDialog(view, options);
-                break;
-            }
-        }
-    }
-
-     private void showDialog(View view, final UCrop.Options options) {
+ 
+   private void showDialog(View view, final UCrop.Options options) {
         final Context context = view.getContext();
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("设置背景图片：").setMessage("如何获取图片？")
@@ -206,13 +166,6 @@
 
                 );
     }
-   
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ButterKnife.unbind(this);//解除绑定
-    }
-}
 
 </pre><br>
 <span style="font-size:24px; color:#ff0000"><br>
