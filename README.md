@@ -110,7 +110,7 @@
         }
     }
 
-    private void showDialog(View view, final UCrop.Options options) {
+     private void showDialog(View view, final UCrop.Options options) {
         final Context context = view.getContext();
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("设置背景图片：").setMessage("如何获取图片？")
@@ -126,15 +126,24 @@
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Consumer<Response<MainActivity, FileData>>() {
                                     @Override
-                                    public void accept(Response<MainActivity, FileData> mainActivityFileDataResponse) throws Exception {
-                                        if (mainActivityFileDataResponse.resultCode() == Activity.RESULT_OK) {
-                                            File filePath = mainActivityFileDataResponse.data().getFile();
-                                            Bitmap bitmap = BitmapFactory.decodeFile(filePath.getPath());
+                                    public void accept(Response<MainActivity, FileData>
+                                                               response) throws Exception {
+                                        if (response.resultCode() == Activity.RESULT_OK) {
+
+                                            File filePath = response.data().getFile();
+                                            Bitmap bitmap = BitmapFactory.
+                                                    decodeFile(filePath.getPath());
                                             iv_appbar.setImageBitmap(bitmap);
-                                        } else if (mainActivityFileDataResponse.resultCode() == Activity.RESULT_CANCELED) {
-                                            Toast.makeText(MainActivity.this, "取消相册访问", Toast.LENGTH_SHORT).show();
+
+                                        } else if (response.resultCode() == Activity.RESULT_CANCELED) {
+
+                                            Toast.makeText(MainActivity.this, "取消相册访问",
+                                                    Toast.LENGTH_SHORT).show();
+
                                         } else {
-                                            Toast.makeText(MainActivity.this, "未知错误！", Toast.LENGTH_SHORT).show();
+
+                                            Toast.makeText(MainActivity.this, "未知错误！",
+                                                    Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
@@ -158,24 +167,24 @@
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Consumer<Response<MainActivity, FileData>>() {
                                     @Override
-                                    public void accept(Response<MainActivity, FileData> response) 
-                                    throws Exception {
+                                    public void accept(Response<MainActivity, FileData>
+                                                               response) throws Exception {
+
                                         if (response.resultCode() == Activity.RESULT_OK) {
                                             FileData filePath = response.data();
                                             Bitmap bitmap = BitmapFactory.
-                                            decodeFile(filePath.getFile().getPath());
-                                           
-                                           iv_appbar.setImageBitmap(bitmap);
+                                                    decodeFile(filePath.getFile().getPath());
+                                            iv_appbar.setImageBitmap(bitmap);
                                         } else if (response.resultCode() == Activity.RESULT_CANCELED) {
-                                            Toast.makeText(MainActivity.this, "取消拍照", 
-                                            Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MainActivity.this, "取消拍照",
+                                                    Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(MainActivity.this, "未知错误！", 
-                                            Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MainActivity.this, "未知错误！",
+                                                    Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
-                       
+                      
                     }
                 });
 
@@ -197,7 +206,7 @@
 
                 );
     }
-
+   
     @Override
     protected void onDestroy() {
         super.onDestroy();
