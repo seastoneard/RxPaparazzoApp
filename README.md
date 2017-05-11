@@ -1,14 +1,14 @@
 <!-- Baidu Button BEGIN -->
 <div id="article_content" class="article_content">
 
-<div style="text-align:center"><strong><span style="font-size:18px">图片裁剪(基于RxPaparazzo)</span></strong></div>
-<div style="text-align:center"><strong><span style="font-size:18px"><br>
+<div style="text-align:center"><strong><span style="font-size:20px">图片裁剪(基于RxPaparazzo)</span></strong></div>
+<div style="text-align:center"><strong><span style="font-size:20px"><br>
 </span></strong></div>
-<div style="text-align:center"><strong><span style="font-size:18px"><br>
+<div style="text-align:center"><strong><span style="font-size:20px"><br>
 </span></strong></div>
 <div style="text-align:left"><br>
 <br>
-<strong><span style="font-size:14px"><span style="color:rgb(51,51,51); font-family:Arial; line-height:26px">前言</span><span style="color:rgb(51,51,51); font-family:Arial; line-height:26px">：</span></span></strong><span style="font-size:14px">基于RxPaparazzo的图片裁剪，图片旋转、比例放大|缩小。</span><br>
+<strong><span style="font-size:14px"><span style="color:rgb(51,51,51); font-family:Arial; line-height:26px">前言</span><span style="color:rgb(51,51,51); font-family:Arial; line-height:26px">：</span></span></strong><span style="font-size:16px">基于RxPaparazzo的图片裁剪，图片旋转、比例放大|缩小。</span><br>
 </div>
 <div style="text-align:left"><span style="font-size:14px"><br>
 </span></div>
@@ -68,7 +68,8 @@
 </span></span></span></span></span></div>
 <div style="text-align:left"><span style="font-size:14px"><span style="color:rgb(51,51,51); font-family:&quot;Microsoft YaHei&quot;,Arial"><strong><span style="color:rgb(51,51,51); font-family:&quot;Microsoft YaHei&quot;,Arial; font-size:14px"><span style="font-family:Arial"><br>
 </span></span></strong></span></span></div>
-<div style="text-align:left"><span style="font-family:&quot;Microsoft YaHei&quot;,Arial"><strong><span style="font-family:&quot;Microsoft YaHei&quot;,Arial"><span style="font-family:Arial"></span></span></strong></span><pre name="code" class="java" style="color: rgb(51, 51, 51); font-size: 14px;">public class MainActivity extends AppCompatActivity {
+<div style="text-align:left"><span style="font-family:&quot;Microsoft YaHei&quot;,Arial"><strong><span style="font-family:&quot;Microsoft YaHei&quot;,Arial"><span style="font-family:Arial"></span></span></strong></span><pre name="code" class="java" style="color: rgb(51, 51, 51); font-size: 14px;">
+  public class MainActivity extends AppCompatActivity {
 
     @Bind(R.id.iv_appbar)
     ImageView iv_appbar;
@@ -76,8 +77,6 @@
     @Bind(R.id.main_toolbar)
     Toolbar toolbar;
 
- /*   @BindView(R.id.btn_float)
-    FloatingActionButton btn_float;*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +89,7 @@
 
     private void initToolBar() {
         this.setSupportActionBar(toolbar);
-        toolbar.setTitle(&quot;我的&quot;);
+        toolbar.setTitle("我的");
     }
 
     @OnClick({R.id.main_toolbar, R.id.btn_float})
@@ -102,7 +101,7 @@
         options.setActiveWidgetColor(color);
         switch (view.getId()) {
             case R.id.main_toolbar:
-                Toast.makeText(MainActivity.this, &quot;Toolbar点击&quot;, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Toolbar点击", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_float: {
                 showDialog(view, options);
@@ -114,8 +113,8 @@
     private void showDialog(View view, final UCrop.Options options) {
         final Context context = view.getContext();
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle(&quot;设置背景图片：&quot;).setMessage(&quot;如何获取图片？&quot;)
-                .setPositiveButton(&quot;相册&quot;, new DialogInterface.OnClickListener() {
+        builder.setTitle("设置背景图片：").setMessage("如何获取图片？")
+                .setPositiveButton("相册", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -125,29 +124,29 @@
                                 .usingGallery()
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Consumer&lt;Response&lt;MainActivity, FileData&gt;&gt;() {
+                                .subscribe(new Consumer<Response<MainActivity, FileData>>() {
                                     @Override
-                                    public void accept(Response&lt;MainActivity, FileData&gt; mainActivityFileDataResponse) throws Exception {
+                                    public void accept(Response<MainActivity, FileData> mainActivityFileDataResponse) throws Exception {
                                         if (mainActivityFileDataResponse.resultCode() == Activity.RESULT_OK) {
                                             File filePath = mainActivityFileDataResponse.data().getFile();
                                             Bitmap bitmap = BitmapFactory.decodeFile(filePath.getPath());
                                             iv_appbar.setImageBitmap(bitmap);
                                         } else if (mainActivityFileDataResponse.resultCode() == Activity.RESULT_CANCELED) {
-                                            Toast.makeText(MainActivity.this, &quot;取消相册访问&quot;, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MainActivity.this, "取消相册访问", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(MainActivity.this, &quot;未知错误！&quot;, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MainActivity.this, "未知错误！", Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
                     }
                 })
-                .setNeutralButton(&quot;取消&quot;, new DialogInterface.OnClickListener() {
+                .setNeutralButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                     }
                 })
-                .setNegativeButton(&quot;拍照&quot;, new DialogInterface.OnClickListener() {
+                .setNegativeButton("拍照", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -157,36 +156,26 @@
                                 .usingCamera()
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Consumer&lt;Response&lt;MainActivity, FileData&gt;&gt;() {
+                                .subscribe(new Consumer<Response<MainActivity, FileData>>() {
                                     @Override
-                                    public void accept(Response&lt;MainActivity, FileData&gt; response) throws Exception {
+                                    public void accept(Response<MainActivity, FileData> response) 
+                                    throws Exception {
                                         if (response.resultCode() == Activity.RESULT_OK) {
                                             FileData filePath = response.data();
-                                            Bitmap bitmap = BitmapFactory.decodeFile(filePath.getFile().getPath());
-                                            iv_appbar.setImageBitmap(bitmap);
+                                            Bitmap bitmap = BitmapFactory.
+                                            decodeFile(filePath.getFile().getPath());
+                                           
+                                           iv_appbar.setImageBitmap(bitmap);
                                         } else if (response.resultCode() == Activity.RESULT_CANCELED) {
-                                            Toast.makeText(MainActivity.this, &quot;取消拍照&quot;, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MainActivity.this, "取消拍照", 
+                                            Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(MainActivity.this, &quot;未知错误！&quot;, Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(MainActivity.this, "未知错误！", 
+                                            Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
-                        /**
-                         * new Consumer&lt;Response&lt;MainActivity, String&gt;&gt;() {
-                        @Override public void accept(@NonNull Response&lt;MainActivity, String&gt; response) throws Exception {
-                        if (response.resultCode() == Activity.RESULT_OK) {
-                        String filePath = response.data();
-                        Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-                        iv_appbar.setImageBitmap(bitmap);
-                        } else if (response.resultCode() == Activity.RESULT_CANCELED) {
-                        Toast.makeText(MainActivity.this, &quot;取消拍照&quot;, Toast.LENGTH_SHORT).show();
-                        } else {
-                        Toast.makeText(MainActivity.this, &quot;未知错误！&quot;, Toast.LENGTH_SHORT).show();
-                        }
-                        }
-                        }
-                         *
-                         */
+                       
                     }
                 });
 
@@ -213,7 +202,10 @@
     protected void onDestroy() {
         super.onDestroy();
         ButterKnife.unbind(this);//解除绑定
-    }</pre><br>
+    }
+}
+
+</pre><br>
 <span style="font-size:24px; color:#ff0000"><br>
 </span></div>
    
