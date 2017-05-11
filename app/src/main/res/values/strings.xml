@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RxPaparazzoApp</string>
+    <string name="appbar_spring_behavior">android.support.design.widget.AppBarLayoutSpringBehavior</string>
+</resources>
